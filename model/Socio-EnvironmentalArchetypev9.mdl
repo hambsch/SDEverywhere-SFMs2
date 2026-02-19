@@ -1,0 +1,233 @@
+{UTF-8}
+environmental impact= WITH LOOKUP (urban population,
+		  ([(0,0)-(1,1)],(0,0.007),(0.05,0.011),(0.1,0.018),(0.15,0.029),(0.2,0.047),(0.25,\
+		0.076),(0.3,0.119),(0.35,0.182),(0.4
+		,0.269),(0.45,0.378),(0.5,0.5),(0.5,0.5),(0.55,0.622),(0.6,0.731),(0.65,0.818),(0.7\
+		,0.881),(0.75,0.924),(0.8,0.953),(0.85
+		,0.971),(0.9,0.982),(0.95,0.989),(1,0.993) ))
+	~	Dmnl
+	~		|
+
+impact on population development= WITH LOOKUP (urban green status,
+		  ([(0,0)-(1,1)],(0,0.007),(0.05,0.011),(0.1,0.018),(0.15,0.029),(0.2,0.047),(0.25,\
+		0.076),(0.3,0.119),(0.35,0.182),(0.4
+		,0.269),(0.45,0.378),(0.5,0.5),(0.5,0.5),(0.55,0.622),(0.6,0.731),(0.65,0.818),(0.7\
+		,0.881),(0.75,0.924),(0.8,0.953),(0.85
+		,0.971),(0.9,0.982),(0.95,0.989),(1,0.993) ))
+	~	Dmnl
+	~		|
+
+population development=
+	impact on population development*population sensitivity*minimal development rate*urban population\
+		*(1-urban population)
+	~	tourists/Year
+	~		|
+
+urban green sensitivity=
+	1
+	~	Dmnl [1,3]
+	~		|
+
+urban green decrease=
+	urban green sensitivity*environmental impact*minimal urban green deline rate*urban green status
+	~	
+	~	environmental sensitivity*environmental impact*Environmental \
+		Status*(1-Environmental Status)
+	|
+
+population sensitivity=
+	1
+	~	Dmnl [1,3]
+	~		|
+
+urban population= INTEG (
+	population development-population decline decline,
+		initial population)
+	~	tourists [0,1]
+	~		|
+
+urban green status= INTEG (
+	urban green increase-urban green decrease,
+		initial urban green status)
+	~	Dmnl
+	~		|
+
+population decline decline=
+	tourism decline rate*urban population
+	~	
+	~	tourism sensitivity*Annual Number of Tourists*(1-Annual Number of Tourists)
+	|
+
+tourism decline rate=
+	0.125
+	~	 [0,2]
+	~		|
+
+urban green increase=
+	urban green resilience*urban green status*(1-urban green status)
+	~	1/Year
+	~		|
+
+minimal urban green deline rate=0.1
+	~	 [0,2]
+	~		|
+
+initial population=0.2
+	~	tourists [0,1]
+	~		|
+
+initial urban green status=
+	0.5
+	~	Dmnl [0,1]
+	~		|
+
+urban green resilience=2
+	~	fraction/Year [0,2]
+	~		|
+
+minimal development rate=2
+	~	fraction/Year [0,2]
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2050
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2020
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.0625
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Arial|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,urban green status,630,566,66,26,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,minimal development rate,431,210,57,35,3,3,0,5,0,0,0,0,255-255-255,255-255-255,|||0-0-0,0,0,0,0,0,0
+10,3,urban population,629,327,66,24,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,environmental impact,961,539,60,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,impact on population development,298,498,51,29,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,urban green resilience,830,489,60,24,3,131,0,5,0,0,0,0,255-255-255,255-255-255,|||0-0-0,0,0,0,0,0,0
+12,7,48,405,326,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,3,4,0,0,22,0,0,0,-1--1--1,,1|(530,326)|
+1,9,10,7,100,0,0,22,0,0,0,-1--1--1,,1|(450,326)|
+11,10,0,491,326,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,population development,491,358,57,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,12,48,830,567,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,13,15,1,4,0,0,22,0,0,0,-1--1--1,,1|(728,567)|
+1,14,15,12,100,0,0,22,0,0,0,-1--1--1,,1|(796,567)|
+11,15,0,766,567,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,16,urban green increase,766,599,60,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,17,2,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,18,3,10,1,1,0,0,0,64,0,-1--1--1,,1|(524,386)|
+1,19,5,11,1,0,0,0,0,64,0,-1--1--1,,1|(376,402)|
+1,20,1,15,1,1,0,0,0,64,0,-1--1--1,,1|(723,521)|
+12,21,0,1488,438,325,237,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Tourism
+10,22,initial population,688,213,57,26,3,3,0,5,-1,0,0,0,255-255-255,255-255-255,|||0-0-0,0,0,0,0,0,0
+1,23,22,3,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+10,24,initial urban green status,712,670,50,34,3,3,0,5,-1,0,0,0,255-255-255,255-255-255,|||0-0-0,0,0,0,0,0,0
+1,25,24,1,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+12,26,48,816,327,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,27,29,3,100,0,0,22,0,192,0,-1--1--1,,1|(719,327)|
+1,28,29,26,4,0,0,22,0,192,0,-1--1--1,,1|(781,327)|
+11,29,0,750,327,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,30,population decline decline,750,361,64,26,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,31,3,30,1,0,0,0,0,192,0,-1--1--1,,1|(708,386)|
+12,32,48,461,565,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,33,35,1,100,0,0,22,0,192,0,-1--1--1,,1|(546,565)|
+1,34,35,32,4,0,0,22,0,192,0,-1--1--1,,1|(494,565)|
+11,35,0,523,565,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,36,urban green decrease,523,597,60,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,37,4,36,1,0,0,0,0,192,0,-1--1--1,,1|(698,740)|
+1,38,6,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,39,1,36,1,1,0,0,0,192,0,-1--1--1,,1|(595,510)|
+10,40,minimal urban green deline rate,468,484,60,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,41,40,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,42,tourism decline rate,686,453,51,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,43,42,30,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,44,population sensitivity,283,382,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,45,44,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,46,urban green sensitivity,363,575,60,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,47,46,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,48,3,4,1,0,0,0,0,192,0,-1--1--1,,1|(892,341)|
+1,49,1,5,1,0,0,0,0,192,0,-1--1--1,,1|(398,696)|
+///---\\\
+:GRAPH Tourism
+:TITLE TOURISM
+:X-AXIS time
+:X-DIV 4
+:X-MIN 2020
+:X-MAX 2040
+:SCALE
+:VAR Annual Number of Tourists
+:Y-MIN 0
+:Y-MAX 1
+:DATASET 
+:LINE-COLOR 255-0-0
+:LINE-WIDTH 2
+:SCALE
+:VAR Environmental Status
+:Y-MIN 0
+:Y-MAX 1
+:DATASET 
+:LINE-COLOR 0-128-0
+:LINE-WIDTH 2
+:L<%^E!@
+1:Current.vdfx
+4:Time
+5:environmental impact
+9:Current
+19:100,0
+24:2020
+25:2050
+26:2050
+23:0
+15:0,0,0,1,0,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:0
+41:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
