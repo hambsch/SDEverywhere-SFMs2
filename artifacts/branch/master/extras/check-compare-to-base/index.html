@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Model Check</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /*
+       * TODO: This avoids white flash when page reloads (due to the CSS bundled with
+       * check-ui-shell being loaded asynchronously); should fix this
+       */
+      body {
+        background-color: #272727;
+      }
+    </style>
+
+    <!--
+      XXX: Include no-op polyfills for these modules that are used in the Node-specific
+      implementation of threads.js.  This allows us to use one model-check bundle that
+      works in both Node and browser environments.  Without this importmap, loading a
+      remote bundle would fail with the following error when trying to import Node
+      modules like `worker_threads` that aren't available in the browser:
+        TypeError: The specifier “worker_threads” was a bare specifier, but was not
+        remapped to anything.
+    -->
+
+
+    <script type="importmap">
+      {
+        "imports": {
+          "events": "./polyfills/noop-polyfills.js",
+          "fs": "./polyfills/noop-polyfills.js",
+          "os": "./polyfills/noop-polyfills.js",
+          "path": "./polyfills/noop-polyfills.js",
+          "url": "./polyfills/noop-polyfills.js",
+          "worker_threads": "./polyfills/noop-polyfills.js"
+        }
+      }
+    </script>
+    <script type="module" crossorigin src="./index-DnjL7dQR.js"></script>
+    <link rel="stylesheet" crossorigin href="./index-CqD6hnRg.css">
+  </head>
+
+  <body>
+    <div id="app-shell-container"></div>
+    <div id="overlay-container">
+      <div id="overlay-content">
+        <div id="overlay-text"></div>
+      </div>
+    </div>
+  </body>
+</html>

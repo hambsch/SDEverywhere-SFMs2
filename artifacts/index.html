@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Branch Builds</title>
+  <style>
+    body {
+      font-family: monospace;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      color: #000;
+    }
+    a, a:visited {
+      color: #2563eb;
+    }
+    hr {
+      margin: 20px 0;
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+    .container {
+      overflow: hidden;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0 20px;
+    }
+    .header {
+      padding: 8px 0;
+      font-weight: 600;
+    }
+    .row {
+      display: contents;
+    }
+    .cell {
+      display: flex;
+      flex-direction: column;
+      padding: 8px 0;
+    }
+    .links {
+      display: flex;
+    }
+    .separator {
+      margin: 0 4px;
+      color: #9ca3af;
+    }
+  </style>
+  <script>
+  function formatDate(isoString) {
+    if (isoString.length === 0) {
+      return 'n/a'
+    }
+    const date = new Date(isoString)
+    const dateString = date.toLocaleDateString(undefined, { day: 'numeric', month: 'numeric', year: 'numeric' })
+    const timeString = date.toLocaleTimeString(undefined, { hour12: false, hour: '2-digit', minute: '2-digit' })
+    return `${dateString} at ${timeString}`
+  }
+
+  // Format all dates on page load so that the time is displayed in the user's local timezone
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.date').forEach(span => {
+      const timestamp = span.getAttribute('data-timestamp')
+      if (timestamp) {
+        span.textContent = formatDate(timestamp)
+      }
+    })
+  })
+  </script>
+</head>
+<body>
+  <div class="container">
+    <a href="latest">Latest production app</a>
+    <br />
+    (last updated: <span class="date" data-timestamp=""></span>)
+    <hr />
+    <div class="grid">
+      <div class="header">Branch</div>
+      <div class="header">Last Updated</div>
+
+      <div class="row">
+        <div class="cell">
+          <span class="branch-name">master</span>
+          <div class="links">
+            <a href="branch/master/app">app</a><span class="separator">|</span><a href="branch/master/extras/check-compare-to-base">checks</a>
+          </div>
+        </div>
+        <div class="cell">
+          <span class="date" data-timestamp="2026-03-20T15:25:12.699Z"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
