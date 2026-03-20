@@ -57,7 +57,7 @@ jobs:
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./scripts/ci-build.js
+        run: node ./scripts/ci-build.js
 
       - name: Check for deploy directory
         id: check-deploy
