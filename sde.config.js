@@ -75,7 +75,7 @@ if (deployBaseUrl && process.env.NODE_ENV !== 'development') {
 // If `genFormat` is 'js', the sde compiler will generate JavaScript code that runs
 // in the browser or in Node.js without the additional Emscripten build step.
 //
-const genFormat = 'c'
+const genFormat = 'js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const configDir = joinPath(__dirname, 'config')
