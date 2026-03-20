@@ -117,12 +117,7 @@ export async function config() {
         outputPaths: [corePath('src', 'model', 'generated', 'worker.js')]
       }),
 
-      // Build or serve the model-check report
-      checkPlugin({
-        baseline: baselineBundle,
-        current: currentBundle,
-        remoteBundlesUrl: deployBaseUrl && `${deployBaseUrl}/metadata/bundles.json`
-      }),
+
 
       // Build or serve the model explorer app
       vitePlugin({
